@@ -4,453 +4,255 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nigeria Investment Marketplace 2026</title>
+  <meta name="description" content="Mobilising Investment for Nigeria's Development. UNDP IOM Sector Pitches, IOM and Projects Nigeria." />
+  <meta name="theme-color" content="#033a5c" />
 
-  <!-- React 18 + Babel (JSX in-browser) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/nipc-logo.webp" />
 
   <style>
+    /* All sizes are in --u: one pixel of the 1672x941 reference design. */
+    :root {
+      --u: max(min(calc(100vw / 1672), calc(100vh / 941)), 0.5px);
+      --white: #ffffff;
+      --gold: #e8c26a;
+      --gold-pale: #f6e08f;
+      --rule: #d9b45f;
+      --btn-top: #07274f;
+      --btn-bottom: #02173a;
+      --btn-hover-top: #0e3a72;
+      --btn-hover-bottom: #082a5c;
+      --btn-border: #4a90e6;
+      --btn-border-top: #8ccdf0;
+      --display: "Montserrat", "Segoe UI", Arial, sans-serif;
+      --heading: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+      --ui: "Inter", "Segoe UI", Arial, sans-serif;
+      color-scheme: dark;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:          #061627;
-      --btn-bg:      rgba(8, 20, 50, 0.90);
-      --btn-border:  rgba(255,255,255,0.28);
-      --btn-hover:   rgba(20, 40, 85, 0.98);
-      --gold:        #c8a84b;
-      --gold-bright: #e5c96a;
-      --white:       #ffffff;
-      --white-80:    rgba(255,255,255,0.80);
-      --white-30:    rgba(255,255,255,0.30);
-      --green-mid:   #1a6b35;
-    }
-
-    html, body, #root {
-      height: 100%;
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Open Sans', sans-serif;
-    }
+    html { background: #033a5c; }
 
     body {
       min-height: 100vh;
+      color: var(--white);
+      font-family: var(--ui);
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* ── Background gradient ── */
-    .bg-layer {
+    .backdrop {
       position: fixed;
       inset: 0;
-      z-index: 0;
-      background: linear-gradient(
-        130deg,
-        #061627 0%,
-        #072040 30%,
-        #083520 60%,
-        #09421a 100%
-      );
-      pointer-events: none;
+      z-index: -1;
+      background: #033a5c url("assets/bg-landscape.webp") center / cover no-repeat;
     }
 
-    /* Dot grid */
-    .bg-layer::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(100,160,255,0.18) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: linear-gradient(to right, rgba(0,0,0,0.65) 0%, transparent 50%);
-      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.65) 0%, transparent 50%);
-    }
-
-    /* ── Geo SVG ── */
-    .geo-layer {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* ── Page layout ── */
     .page {
-      position: relative;
-      z-index: 10;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px max(20px, env(safe-area-inset-left, 20px));
-    }
-
-    /* ── Card ── */
-    .card {
-      width: 100%;
-      max-width: 740px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      gap: 0;
-    }
-
-    /* ── Logo row ── */
-    .logo-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-
-    .logo-divider {
-      width: 1px;
-      height: 60px;
-      background: var(--white-30);
-    }
-
-    .nipc-brand { display: flex; flex-direction: column; align-items: flex-start; }
-
-    .nipc-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      line-height: 1;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-    }
-
-    .nipc-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #2a9a4a;
-      margin: 0 1px;
-      position: relative;
-      top: -3px;
-    }
-
-    .nipc-sub {
-      font-size: 0.52rem;
-      font-weight: 600;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      color: var(--white-80);
-      margin-top: 5px;
-    }
-
-    /* ── Title section ── */
-    .title-rule {
-      display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin-bottom: 6px;
+      text-align: center;
+      padding-top: calc(var(--u) * 36);
+      padding-bottom: calc(var(--u) * 175);
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
     }
 
-    .rule-line {
-      height: 2px;
-      width: 70px;
-      background: linear-gradient(to right, transparent, var(--gold));
+    .logo {
+      display: block;
+      width: calc(var(--u) * 384);
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 768 / 255;
+      margin-bottom: calc(var(--u) * 24.5);
     }
-    .rule-line.right {
-      background: linear-gradient(to left, transparent, var(--gold));
-    }
+
+    .title { font-family: var(--display); font-weight: 800; }
+    .title span { display: block; white-space: nowrap; }
 
     .title-nigeria {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.9rem, 5vw, 2.9rem);
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: var(--white);
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--u) * 30);
+      font-size: calc(var(--u) * 63);
+      line-height: calc(var(--u) * 55);
     }
 
-    .title-investment {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2.5rem, 7vw, 4.1rem);
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      color: var(--gold-bright);
-      text-shadow: 0 0 48px rgba(228, 196, 90, 0.4);
-      line-height: 1;
-      margin: 2px 0;
+    .title-nigeria::before,
+    .title-nigeria::after {
+      content: "";
+      width: calc(var(--u) * 90);
+      height: max(1px, calc(var(--u) * 2));
+      background: linear-gradient(to right, transparent, var(--rule));
     }
 
-    .title-marketplace {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.9rem, 5vw, 2.9rem);
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: var(--white);
-      margin-bottom: 10px;
+    .title-nigeria::after { background: linear-gradient(to left, transparent, var(--rule)); }
+
+    .title .title-investment {
+      font-size: calc(var(--u) * 55);
+      line-height: calc(var(--u) * 54);
+      color: var(--gold);
     }
 
-    /* ── Subtitle ── */
-    .subtitle {
-      font-size: clamp(0.82rem, 2.2vw, 1rem);
-      color: var(--gold-bright);
-      letter-spacing: 0.01em;
-      margin-bottom: 36px;
-    }
-
-    .subtitle strong {
+    .title .title-marketplace {
+      font-size: calc(var(--u) * 42.7);
+      line-height: calc(var(--u) * 44);
       font-weight: 700;
-      color: var(--white);
     }
 
-    /* ── Section heading ── */
+    .title .title-year { display: inline; color: var(--gold); font-weight: 800; }
+
+    .tagline {
+      font-family: var(--display);
+      font-size: calc(var(--u) * 22.5);
+      line-height: calc(var(--u) * 26);
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: calc(var(--u) * 14);
+      text-wrap: balance;
+    }
+
+    .tagline strong { font-weight: 600; color: var(--gold-pale); }
+
     .section-heading {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      font-family: var(--heading);
+      font-size: calc(var(--u) * 36.8);
+      line-height: calc(var(--u) * 42);
       font-weight: 700;
-      color: var(--white);
-      margin-bottom: 20px;
+      margin-top: calc(var(--u) * 40);
+      text-wrap: balance;
+      text-shadow: 0 1px 6px rgba(0, 20, 50, 0.45);
     }
 
-    /* ── Link buttons ── */
     .links {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      width: 100%;
-      max-width: 580px;
+      gap: calc(var(--u) * 20.5);
+      width: calc(var(--u) * 818);
+      max-width: 100%;
+      margin-top: calc(var(--u) * 40);
     }
 
     .link-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 18px 28px;
-      background: var(--btn-bg);
-      border: 1.5px solid var(--btn-border);
-      border-radius: 8px;
+      min-height: max(44px, calc(var(--u) * 74));
+      padding: 4px 16px calc(var(--u) * 4 + 4px);
+      border: max(1px, calc(var(--u) * 1.5)) solid var(--btn-border);
+      border-top-color: var(--btn-border-top);
+      border-radius: calc(var(--u) * 20);
+      background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+      box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 22) rgba(2, 16, 45, 0.4);
       color: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.95rem, 2.4vw, 1.08rem);
-      font-weight: 700;
+      font-family: var(--ui);
+      font-size: max(15px, calc(var(--u) * 29));
       letter-spacing: 0.02em;
+      font-weight: 700;
       text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .link-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
-      pointer-events: none;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .link-btn:hover {
-      background: var(--btn-hover);
-      border-color: rgba(255,255,255,0.5);
-      transform: translateY(-2px);
+      background: linear-gradient(180deg, var(--btn-hover-top), var(--btn-hover-bottom));
+      border-color: #8fc0f7;
     }
 
-    .link-btn:active { transform: translateY(0); }
-
     .link-btn:focus-visible {
-      outline: 2px solid var(--gold);
+      outline: 3px solid var(--gold-pale);
       outline-offset: 3px;
     }
 
-    /* ── Phone ── */
-    @media (max-width: 480px) {
-      .logo-divider { height: 46px; }
-      .nipc-name { font-size: 1.55rem; }
-      .link-btn { padding: 16px 18px; }
+    @media (max-aspect-ratio: 1/1) {
+      :root { --u: min(calc(100vw / 560), calc(100vh / 800)); }
+
+      .backdrop { background-image: url("assets/bg-portrait.webp"); }
+
+      .page {
+        padding-top: calc(var(--u) * 36);
+        padding-bottom: calc(var(--u) * 36);
+      }
+
+      .tagline { font-size: calc(var(--u) * 20); }
+      .section-heading { max-width: calc(var(--u) * 500); }
+      .links { width: calc(var(--u) * 500); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-btn { transition: none; }
     }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
-  <script type="text/babel">
-    const { useState } = React;
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script>
+    const h = React.createElement;
 
-    /* ── Icons ── */
-    const FolderIcon = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-      </svg>
-    );
+    const LINKS = [
+      {
+        label: "UNDP IOM Sector Pitches",
+        href: "https://drive.google.com/drive/folders/1qs07X-oADfyB7zEHk20DOQLtRISLUeOz?usp=drive_link",
+      },
+      {
+        label: "IOM_r6",
+        href: "https://drive.google.com/file/d/16jrzGCsog6zHhOy08MC5DODXdhPYpVVI/view?usp=drive_link",
+      },
+      {
+        label: "Projects Nigeria",
+        href: "https://finance.gov.ng/projectsnigeria",
+      },
+    ];
 
-    const FileIcon = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-      </svg>
-    );
+    function App() {
+      return h(React.Fragment, null,
+        h("div", { className: "backdrop", "aria-hidden": "true" }),
+        h("main", { className: "page" },
+          h("img", {
+            className: "logo",
+            src: "assets/nipc-logo.webp",
+            width: 768,
+            height: 255,
+            alt: "Nigerian Investment Promotion Commission (NIPC)",
+          }),
+          h("h1", { className: "title" },
+            h("span", { className: "title-nigeria" }, "NIGERIA"),
+            h("span", { className: "title-investment" }, "INVESTMENT"),
+            h("span", { className: "title-marketplace" },
+              "MARKETPLACE ",
+              h("span", { className: "title-year" }, "2026")
+            )
+          ),
+          h("p", { className: "tagline" },
+            "Mobilising Investment for ",
+            h("strong", null, "Nigeria’s Development")
+          ),
+          h("h2", { className: "section-heading" }, "UNDP IOM Sector Pitches, IOM and Projects Nigeria"),
+          h("nav", { className: "links", "aria-label": "Event documents" },
+            LINKS.map(function (link) {
+              return h("a", {
+                key: link.href,
+                className: "link-btn",
+                href: link.href,
+                target: "_blank",
+                rel: "noopener noreferrer",
+              }, link.label);
+            })
+          )
+        )
+      );
+    }
 
-    const GlobeIcon = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-    );
-
-    /* ── Coat of Arms ── */
-    const CoatOfArms = () => (
-      <svg width="64" height="70" viewBox="0 0 64 70" fill="none" aria-label="Nigerian Coat of Arms">
-        <defs>
-          <clipPath id="shield">
-            <path d="M32 3 L60 16 L60 42 Q60 59 32 68 Q4 59 4 42 L4 16 Z"/>
-          </clipPath>
-        </defs>
-        {/* Shield fill */}
-        <path d="M32 3 L60 16 L60 42 Q60 59 32 68 Q4 59 4 42 L4 16 Z" fill="#0d1a30"/>
-        {/* Black halves */}
-        <path d="M32 5 L32 66 Q6 57 6 42 L6 17 Z" fill="#111111"/>
-        <path d="M32 5 L58 17 L58 42 Q58 57 32 66 Z" fill="#111111"/>
-        {/* Green vertical / horizontal Y band */}
-        <rect x="27" y="18" width="10" height="34" fill="#008000" clipPath="url(#shield)"/>
-        <rect x="6" y="18" width="52" height="10" fill="#008000" clipPath="url(#shield)"/>
-        {/* Eagle silhouette */}
-        <ellipse cx="32" cy="30" rx="7" ry="5" fill="#c8a84b"/>
-        <path d="M32 25 L32 20 M25 28 L14 20 M39 28 L50 20" stroke="#c8a84b" strokeWidth="2.5" strokeLinecap="round"/>
-        {/* River waves */}
-        <path d="M12 48 Q17 45 22 48 Q27 51 32 48 Q37 45 42 48 Q47 51 52 48"
-              stroke="white" strokeWidth="1.2" fill="none" clipPath="url(#shield)" opacity="0.7"/>
-        <path d="M12 53 Q17 50 22 53 Q27 56 32 53 Q37 50 42 53 Q47 56 52 53"
-              stroke="white" strokeWidth="1.2" fill="none" clipPath="url(#shield)" opacity="0.7"/>
-        {/* Flag strip bottom */}
-        <rect x="6"  y="59" width="11" height="8" fill="#008000" clipPath="url(#shield)"/>
-        <rect x="17" y="59" width="10" height="8" fill="white"   clipPath="url(#shield)"/>
-        <rect x="27" y="59" width="10" height="8" fill="#008000" clipPath="url(#shield)"/>
-        <rect x="37" y="59" width="10" height="8" fill="white"   clipPath="url(#shield)"/>
-        <rect x="47" y="59" width="11" height="8" fill="#008000" clipPath="url(#shield)"/>
-        {/* Border */}
-        <path d="M32 3 L60 16 L60 42 Q60 59 32 68 Q4 59 4 42 L4 16 Z"
-              fill="none" stroke="#c8a84b" strokeWidth="1.5"/>
-      </svg>
-    );
-
-    /* ── Geo background SVG ── */
-    const GeoBg = () => (
-      <svg className="geo-layer" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        {/* Left — blue outlines */}
-        <g opacity="0.45" stroke="#3a6fd8" strokeWidth="1.5" fill="none">
-          <polygon points="-40,160 60,80 160,160 60,240"/>
-          <polygon points="-80,320 60,200 200,320 60,440"/>
-          <polygon points="-40,500 80,400 200,500 80,600"/>
-          <polygon points="30,660 130,570 230,660 130,750"/>
-        </g>
-        {/* Left — faint fill */}
-        <g opacity="0.07" fill="#2255cc">
-          <polygon points="0,0 100,0 0,200"/>
-          <polygon points="0,240 70,240 0,420"/>
-          <polygon points="0,500 55,500 0,640"/>
-        </g>
-        {/* Right — green outlines */}
-        <g opacity="0.45" stroke="#2a9a4a" strokeWidth="1.5" fill="none">
-          <polygon points="1280,80  1380,0   1480,80  1380,160"/>
-          <polygon points="1240,250 1380,130 1520,250 1380,370"/>
-          <polygon points="1260,430 1380,330 1500,430 1380,530"/>
-          <polygon points="1300,600 1400,520 1500,600 1400,680"/>
-          <polygon points="1340,750 1420,680 1500,750 1420,820"/>
-        </g>
-        {/* Right — filled accent */}
-        <g opacity="0.11" fill="#1a8040">
-          <polygon points="1340,100 1440,0   1440,200"/>
-          <polygon points="1360,330 1440,230 1440,440"/>
-          <polygon points="1360,560 1440,460 1440,660"/>
-          <polygon points="1380,760 1440,680 1440,860"/>
-        </g>
-      </svg>
-    );
-
-    /* ── Link button ── */
-    const LinkBtn = ({ href, icon: Icon, label }) => (
-      <a className="link-btn" href={href} target="_blank" rel="noopener noreferrer">
-        <Icon />
-        {label}
-      </a>
-    );
-
-    /* ── App ── */
-    const App = () => (
-      <>
-        <div className="bg-layer" aria-hidden="true" />
-        <GeoBg />
-
-        <div className="page">
-          <main className="card">
-
-            {/* Logo */}
-            <div className="logo-row">
-              <CoatOfArms />
-              <div className="logo-divider" />
-              <div className="nipc-brand">
-                <span className="nipc-name">
-                  ni<span className="nipc-dot" />pc
-                </span>
-                <span className="nipc-sub">Nigerian Investment Promotion Commission</span>
-              </div>
-            </div>
-
-            {/* Title */}
-            <div className="title-rule">
-              <span className="rule-line" />
-              <span className="title-nigeria">NIGERIA</span>
-              <span className="rule-line right" />
-            </div>
-            <div className="title-investment">INVESTMENT</div>
-            <div className="title-marketplace">MARKETPLACE 2026</div>
-
-            {/* Subtitle */}
-            <p className="subtitle">
-              Mobilising Investment for <strong>Nigeria's Development</strong>
-            </p>
-
-            {/* Section heading */}
-            <h2 className="section-heading">
-              UNDP IOM Sector Pitches, IOM and Projects Nigeria
-            </h2>
-
-            {/* Buttons */}
-            <nav className="links" aria-label="Resources">
-              <LinkBtn
-                href="https://drive.google.com/drive/folders/1qs07X-oADfyB7zEHk20DOQLtRISLUeOz?usp=drive_link"
-                icon={FolderIcon}
-                label="UNDP IOM Sector Pitches"
-              />
-              <LinkBtn
-                href="https://drive.google.com/file/d/16jrzGCsog6zHhOy08MC5DODXdhPYpVVI/view?usp=drive_link"
-                icon={FileIcon}
-                label="IOM_r6"
-              />
-              <LinkBtn
-                href="https://finance.gov.ng/projectsnigeria"
-                icon={GlobeIcon}
-                label="Projects Nigeria"
-              />
-            </nav>
-
-          </main>
-        </div>
-      </>
-    );
-
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    ReactDOM.createRoot(document.getElementById("root")).render(h(App));
   </script>
 </body>
 </html>
