@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nigeria Investment Marketplace 2026</title>
-  <meta name="description" content="Mobilising Investment for Nigeria's Development. UNDP IOM Sector Pitches, IOM and Projects Nigeria." />
+  <meta name="description"
+    content="Mobilising Investment for Nigeria's Development. UNDP IOM Sector Pitches, IOM and Projects Nigeria." />
   <meta name="theme-color" content="#033a5c" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@700&display=swap"
+    rel="stylesheet" />
   <link rel="preload" as="image" href="assets/nipc-logo.webp" />
 
   <style>
@@ -32,9 +36,17 @@
       color-scheme: dark;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html { background: #033a5c; }
+    html {
+      background: #033a5c;
+    }
 
     body {
       min-height: 100vh;
@@ -73,8 +85,15 @@
       margin-bottom: calc(var(--u) * 24.5);
     }
 
-    .title { font-family: var(--display); font-weight: 800; }
-    .title span { display: block; white-space: nowrap; }
+    .title {
+      font-family: var(--display);
+      font-weight: 800;
+    }
+
+    .title span {
+      display: block;
+      white-space: nowrap;
+    }
 
     .title-nigeria {
       display: flex !important;
@@ -93,7 +112,9 @@
       background: linear-gradient(to right, transparent, var(--rule));
     }
 
-    .title-nigeria::after { background: linear-gradient(to left, transparent, var(--rule)); }
+    .title-nigeria::after {
+      background: linear-gradient(to left, transparent, var(--rule));
+    }
 
     .title .title-investment {
       font-size: calc(var(--u) * 55);
@@ -107,7 +128,11 @@
       font-weight: 700;
     }
 
-    .title .title-year { display: inline; color: var(--gold); font-weight: 800; }
+    .title .title-year {
+      display: inline;
+      color: var(--gold);
+      font-weight: 800;
+    }
 
     .tagline {
       font-family: var(--display);
@@ -119,7 +144,10 @@
       text-wrap: balance;
     }
 
-    .tagline strong { font-weight: 600; color: var(--gold-pale); }
+    .tagline strong {
+      font-weight: 600;
+      color: var(--gold-pale);
+    }
 
     .section-heading {
       font-family: var(--heading);
@@ -171,25 +199,40 @@
     }
 
     @media (max-aspect-ratio: 1/1) {
-      :root { --u: min(calc(100vw / 560), calc(100vh / 800)); }
+      :root {
+        --u: min(calc(100vw / 560), calc(100vh / 800));
+      }
 
-      .backdrop { background-image: url("assets/bg-portrait.webp"); }
+      .backdrop {
+        background-image: url("assets/bg-portrait.webp");
+      }
 
       .page {
         padding-top: calc(var(--u) * 36);
         padding-bottom: calc(var(--u) * 36);
       }
 
-      .tagline { font-size: calc(var(--u) * 20); }
-      .section-heading { max-width: calc(var(--u) * 500); }
-      .links { width: calc(var(--u) * 500); }
+      .tagline {
+        font-size: calc(var(--u) * 20);
+      }
+
+      .section-heading {
+        max-width: calc(var(--u) * 500);
+      }
+
+      .links {
+        width: calc(var(--u) * 500);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .link-btn { transition: none; }
+      .link-btn {
+        transition: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <div id="root"></div>
 
@@ -204,7 +247,7 @@
         href: "https://drive.google.com/drive/folders/1qs07X-oADfyB7zEHk20DOQLtRISLUeOz?usp=drive_link",
       },
       {
-        label: "IOM_r6",
+        label: "Investment Opportunity Mapping (IOM",
         href: "https://drive.google.com/file/d/16jrzGCsog6zHhOy08MC5DODXdhPYpVVI/view?usp=drive_link",
       },
       {
@@ -255,4 +298,5 @@
     ReactDOM.createRoot(document.getElementById("root")).render(h(App));
   </script>
 </body>
+
 </html>
